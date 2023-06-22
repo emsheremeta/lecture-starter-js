@@ -1,11 +1,23 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable no-else-return */
 import createElement from '../helpers/domHelper';
 import renderArena from './arena';
 import versusImg from '../../../resources/versus.png';
 import { createFighterPreview } from './fighterPreview';
+import fighterService from '../services/fightersService';
 
 const fighterDetailsMap = new Map();
 
 export async function getFighterInfo(fighterId) {
+    const fighterInfoFromMap = fighterDetailsMap.get(fighterId);
+    if (!fighterInfoFromMap) {
+        const fighterInformation = await fighterService.getFighterDetails(fighterId);
+        fighterDetailsMap.set(fighterId, fighterInformation);
+        return fighterInformation;
+    } else {
+        return fighterInfoFromMap;
+    }
+
     // get fighter info from fighterDetailsMap or from service and write it to fighterDetailsMap
 }
 

@@ -1,5 +1,8 @@
+/* eslint-disable import/no-cycle */
 import createElement from '../helpers/domHelper';
+import { fight } from './fight';
 import { createFighterImage } from './fighterPreview';
+import { showWinnerModal } from './modal/winner';
 
 function createFighter(fighter, position) {
     const imgElement = createFighterImage(fighter);
@@ -69,4 +72,11 @@ export default function renderArena(selectedFighters) {
     // todo:
     // - start the fight
     // - when fight is finished show winner
+    fight(selectedFighters[0], selectedFighters[1])
+        .then(winner => {
+            showWinnerModal(winner);
+        })
+        .catch(error => {
+            console.error(`onRejected function called: ${error.message}`);
+        });
 }

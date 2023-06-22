@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { fightersDetails, fighters } from './mockData';
 
 const BASE_API_URL =
@@ -9,7 +10,8 @@ const SECURITY_HEADERS = {
          * To test the application against the real dataset set useMockAPI=false.
          * But to test the application you don't need to extend the GitHub REST API rate limit to 5000 requests with the token
          */
-        // authorization: 'token %github_token%'
+        authorization:
+            'token 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'
     }
 };
 
